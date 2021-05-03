@@ -6,6 +6,7 @@ As of API Level 30, Android AsyncTask will be deprecated. This is just a Java al
 How to use
 
 ```java
+import java.util.concurrent.Callable;
 class LongRunningTask implements Callable<Object> {
                 @Override
                 public Object call() throws Exception {
@@ -15,7 +16,7 @@ class LongRunningTask implements Callable<Object> {
             }
 
             SabianAsyncTask task = new SabianAsyncTask();
-            
+
             task.executeAsync(new LongRunningTask(), new Callback<Object>() {
                 @Override
                 public void onBefore() {
@@ -25,7 +26,7 @@ class LongRunningTask implements Callable<Object> {
                 @Override
                 public void onComplete(Object result) {
                     //Do some work on the main thread after the background thread completes
-                    Log.i("TaskCompleted", String.format("Task has completed with result %s", r.toString());
+                    Log.i("TaskCompleted", String.format("Task has completed with result %s", result.toString());
                 }
                 @Override
                 public void onError(Throwable e) {
