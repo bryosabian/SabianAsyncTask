@@ -9,30 +9,32 @@ How to use
 import java.util.concurrent.Callable;
 
 class LongRunningTask implements Callable<Object> {
-                @Override
-                public Object call() throws Exception {
-                    //Do long running task here
-                    return null;
-                }
+        @Override
+        public Object call() throws Exception {
+            //Do long running task here
+            return null;
+        }
+    }
+
+    private void runTask(){
+        SabianAsyncTask task = new SabianAsyncTask();
+
+        task.executeAsync(new LongRunningTask(), new Callback<Object>() {
+            @Override
+            public void onBefore() {
+                //Do something on the main thread befre the task runs e.g Show progress
+                Log.i("TaskStart", "Task has begun");
             }
-
-            SabianAsyncTask task = new SabianAsyncTask();
-
-            task.executeAsync(new LongRunningTask(), new Callback<Object>() {
-                @Override
-                public void onBefore() {
-                    //Do something on the main thread befre the task runs e.g Show progress
-                    Log.i("TaskStart", "Task has begun");
-                }
-                @Override
-                public void onComplete(Object result) {
-                    //Do some work on the main thread after the background thread completes
-                    Log.i("TaskCompleted", String.format("Task has completed with result %s", result.toString()));
-                }
-                @Override
-                public void onError(Throwable e) {
-                    //Do some work on the main thread after the background thread fails or throws an exception
-                    Log.i("TaskFail", String.format("Task has failed with error %s", e.getMessage()));
-                }
-            });
+            @Override
+            public void onComplete(Object result) {
+                //Do some work on the main thread after the background thread completes
+                Log.i("TaskCompleted", String.format("Task has completed with result %s", result.toString()));
+            }
+            @Override
+            public void onError(Throwable e) {
+                //Do some work on the main thread after the background thread fails or throws an exception
+                Log.i("TaskFail", String.format("Task has failed with error %s", e.getMessage()));
+            }
+        });
+    }
 ```
