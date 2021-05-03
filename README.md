@@ -4,7 +4,8 @@ A utility thread tool for handling background threads in Java.
 As of API Level 30, Android AsyncTask will be deprecated. This is just a Java alternative for that. For a Kotlin alternative, please use Kotlin Coroutines (https://developer.android.com/kotlin/coroutines) which is highly recommended. 
 
 How to use
-'''java
+
+```java
 class LongRunningTask implements Callable<Object> {
   @Override
         public Object call() throws Exception {
@@ -34,4 +35,4 @@ task.executeAsync(new LongRunningTask(), new Callback<Object>() {
                    ..
                 }
             });
- '''java
+```
