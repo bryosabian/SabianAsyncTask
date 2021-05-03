@@ -15,6 +15,7 @@ class LongRunningTask implements Callable<Object> {
             }
 
             SabianAsyncTask task = new SabianAsyncTask();
+            
             task.executeAsync(new LongRunningTask(), new Callback<Object>() {
                 @Override
                 public void onBefore() {
