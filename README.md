@@ -12,7 +12,7 @@ static class LongRunningTask implements Callable<Object> {
         @Override
         public Object call() throws Exception {
             //Do long running task here
-            return null;
+            return "Test";
         }
     }
 
