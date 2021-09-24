@@ -8,7 +8,7 @@ How to use
 ```java
 import java.util.concurrent.Callable;
 
-class LongRunningTask implements Callable<Object> {
+static class LongRunningTask implements Callable<Object> {
         @Override
         public Object call() throws Exception {
             //Do long running task here
