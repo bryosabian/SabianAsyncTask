@@ -22,17 +22,17 @@ class LongRunningTask implements Callable<Object> {
         task.executeAsync(new LongRunningTask(), new Callback<Object>() {
             @Override
             public void onBefore() {
-                //Do something on the main thread befre the task runs e.g Show progress
+                //Do something on the main thread before the task runs e.g Show progress
                 Log.i("TaskStart", "Task has begun");
             }
             @Override
             public void onComplete(Object result) {
-                //Do some work on the main thread after the background thread completes
+                //Do some work on the main thread after the background task completes
                 Log.i("TaskCompleted", String.format("Task has completed with result %s", result.toString()));
             }
             @Override
             public void onError(Throwable e) {
-                //Do some work on the main thread after the background thread fails or throws an exception
+                //Do some work on the main thread after the background task fails or throws an exception
                 Log.i("TaskFail", String.format("Task has failed with error %s", e.getMessage()));
             }
         });
