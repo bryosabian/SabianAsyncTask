@@ -32,14 +32,14 @@ public class SabianAsyncTask {
     /**
      * The default mutli thread pool executor. Usable for multiple threading like network services e.t.c
      */
-    private static final Executor MULTIPLE_THREAD_POOL_EXECUTOR =
+    private final Executor MULTIPLE_THREAD_POOL_EXECUTOR =
             new ThreadPoolExecutor(5, 128, 1,
                     TimeUnit.SECONDS, new LinkedBlockingQueue<>());
 
     /**
      * The default single thread pool executor
      */
-    private static final Executor SINGLE_THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
+    private final Executor SINGLE_THREAD_POOL_EXECUTOR = Executors.newSingleThreadExecutor();
 
 
     /**
