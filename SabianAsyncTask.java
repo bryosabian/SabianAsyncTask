@@ -2,6 +2,7 @@ package com.sabiantools.utilities.threads;
 
 import android.os.Handler;
 import android.os.Looper;
+
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -124,8 +125,6 @@ public class SabianAsyncTask {
 
         initExecutor();
 
-        initHandler();
-
         callback.onBefore();
 
         executor.execute(() -> {
@@ -142,6 +141,8 @@ public class SabianAsyncTask {
             boolean isSuccess = throwable == null;
             R finalResult = result;
             Throwable error = throwable;
+
+            initHandler();
 
             handler.post(() -> {
                 if (isSuccess)
