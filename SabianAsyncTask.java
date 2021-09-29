@@ -27,7 +27,7 @@ public class SabianAsyncTask {
     /**
      * Our handler
      */
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    private Handler handler;
 
     /**
      * The service collections
@@ -65,6 +65,15 @@ public class SabianAsyncTask {
     private void initExecutor() {
         if (executor == null) {
             executor = services.get(service);
+        }
+    }
+
+    /**
+     * Inits the handler
+     */
+    private void initHandler() {
+        if (handler == null) {
+            handler = new Handler(Looper.getMainLooper());
         }
     }
 
@@ -114,6 +123,8 @@ public class SabianAsyncTask {
     public <R> void executeAsync(Callable<R> callable, Callback<R> callback) {
 
         initExecutor();
+
+        initHandler();
 
         callback.onBefore();
 
@@ -172,6 +183,10 @@ public class SabianAsyncTask {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            if (handler != null) {
+                handler.removeCallbacksAndMessages(null);
+                handler = null;
+            }
             if (executor != null) {
                 executor = null;
             }
